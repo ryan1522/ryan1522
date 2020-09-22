@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const token = process.argv.length == 2 ? process.env.token : '';
+const token = process.argv.length == 2 ? process.env.token : "";
 const welcomeChannelName = "안녕하세요";
 const byeChannelName = "안녕하세요";
 const welcomeChannelComment = "어서오세요.";
@@ -8,6 +8,7 @@ const byeChannelComment = "안녕히가세요.";
 
 client.on('ready', () => {
   console.log('켰다.');
+  client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -45,7 +46,7 @@ client.on('message', (message) => {
       .addBlankField()
       .addField('Inline field title', '잘생김')
       .addField('Inline field title', '봇 3트', true)
-      .addField('Inline field title', '공부 잘함', true)
+      .addField('Inline field title', '공부잘함', true)
       .addField('Inline field title', '목표 서울대 의대 가기', true)
       .addField('Inline field title', '재밌는 인생(?)\n행복하면 좋은 인생(?)\n맞아 쓸거 없어서 이딴거 쓰는 중\n')
       .addBlankField()
@@ -53,19 +54,20 @@ client.on('message', (message) => {
       .setFooter('엑셀렌트가 만듬', img)
 
     message.channel.send(embed)
-  } else if(message.content == 'embed2') {
+  } else if(message.content == 'help') {
     let helpImg = 'https://media.discordapp.net/attachments/757747891312918618/757753105088643142/5.jpg';
     let commandList = [
       {name: 'ping', desc: '현재 핑 상태'},
       {name: 'embed', desc: 'embed 예제1'},
       {name: 'embed2', desc: 'embed 예제2 (help)'},
       {name: '!전체공지', desc: 'dm으로 전체 공지 보내기'},
+      {name: '!청소', desc: '텍스트 지움'},
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
       .setAuthor('Help of 엑셀렌트 BOT', helpImg)
       .setColor('#186de6')
-      .setFooter(`엑셀렌트 BOT `)
+      .setFooter(`엑셀렌트 봇`)
       .setTimestamp()
     
     commandList.forEach(x => {
