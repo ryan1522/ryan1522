@@ -36,6 +36,10 @@ client.on('message', (message) => {
     return message.reply('pong');
   }
 
+  if(message.content == '인트') {
+    return message.reply('구독해주세요.');
+  }
+
   if(message.content == 'embed') {
     let img = 'https://media.discordapp.net/attachments/757747891312918618/757753105088643142/5.jpg';
     let embed = new Discord.RichEmbed()
