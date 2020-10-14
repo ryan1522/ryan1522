@@ -56,6 +56,11 @@ client.on('message', (message) => {
     return message.reply('응 아니야 자기소개 하지 마요,' + `<@${message.author.id}>`+ "바보~");
   }
 
+  if(message.content == '권혁준') {
+    return message.reply("바보");
+  }
+
+
   if(message.content == 'embed') {
     let img = 'https://media.discordapp.net/attachments/757747891312918618/757753105088643142/5.jpg';
     let embed = new Discord.RichEmbed()
