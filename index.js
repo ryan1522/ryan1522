@@ -40,6 +40,22 @@ client.on('message', (message) => {
     return message.reply('구독해주세요.');
   }
 
+  if(message.content == '렌트야') {
+    return message.reply('네 무엇을 도와 드릴까요?');
+  }
+
+ if(message.content == '렌트야 도움말') {
+    return message.reply('렌트야, ping, embed2, !전체공지, !청소와 같은 명령어가 있습니다! 자신의 권한이 이 명령어를 사용할 수 있는 등급인지 알아 보시고 사용해 주세요!');
+  }
+
+  if(message.content == '렌트야 내 이름') {
+    return message.reply(message, `<@${message.author.id}>`+ "맞으시죠?");
+  }
+
+  if(message.content == '렌트야 바보') {
+    return message.reply('응 아니야 자기소개 하지 마요,' + `<@${message.author.id}>`+ ".");
+  }
+
   if(message.content == 'embed') {
     let img = 'https://media.discordapp.net/attachments/757747891312918618/757753105088643142/5.jpg';
     let embed = new Discord.RichEmbed()
