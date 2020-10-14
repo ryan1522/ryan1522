@@ -41,7 +41,7 @@ client.on('message', (message) => {
   }
 
   if(message.content == '렌트야') {
-    return message.reply('네 무엇을 도와 드릴까요?');
+    return message.reply('네 무엇을 도와 드릴까요? "렌트야 도움말"이라 적어보세요!');
   }
 
  if(message.content == '렌트야 도움말') {
