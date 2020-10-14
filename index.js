@@ -49,7 +49,7 @@ client.on('message', (message) => {
   }
 
   if(message.content == '렌트야 내 이름') {
-    return message.reply(message, `<@${message.author.id}>`+ "맞으시죠?");
+    return message.reply( `<@${message.author.id}>`+ "맞으시죠?");
   }
 
   if(message.content == '렌트야 바보') {
