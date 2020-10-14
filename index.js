@@ -56,27 +56,27 @@ client.on('message', (message) => {
     return message.reply('응 아니야 자기소개 하지 마요,' + `<@${message.author.id}>`+ "바보~");
   }
 
-  if(message.content == '권혁준') {
+  if(message.content == '렌트야 권혁준') {
     return message.reply("다크맨");
   }
 
-  if(message.content == '계란말이다') {
+  if(message.content == '렌트야 계란말이다') {
     return message.reply("이스터에그 1 계란을 까서 휘저은 후 프라이팬에 올려 구운후 돌돌말아서 먹는다.");
   }
 
-  if(message.content == '박승원') {
+  if(message.content == '렌트야 박승원') {
     return message.reply("엑셀렌트의 본명.");
   }
 
-  if(message.content == '엑셀렌트') {
+  if(message.content == '렌트야 엑셀렌트') {
     return message.reply("콜오브듀티의 닉네임이다. 프로필은 콜오브 듀티 전설 랭크");
   }
 
-  if(message.content == '엑셀렌트 봇') {
+  if(message.content == '렌트야 엑셀렌트 봇') {
     return message.reply("엑셀렌트가 만든 봇. 거의 모든 것이 똑같다.");
   }
 
-  if(message.content == '프로그램') {
+  if(message.content == '렌트야 프로그램') {
     return message.reply("1번째 업데이트 기준으로 총 208개의 줄로 이루어진 node.js 명령어로 만들어 졌다.");
   }
 
