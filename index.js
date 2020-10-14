@@ -8,7 +8,7 @@ const byeChannelComment = "안녕히가세요.";
 
 client.on('ready', () => {
   console.log('켰다.');
-  client.user.setPresence({ game: { name: '점검 및 업데이트 중' }, status: 'dnd' })
+  client.user.setPresence({ game: { name: '"렌트야"라고 적어보세요!' }, status: 'online' })
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -53,7 +53,7 @@ client.on('message', (message) => {
   }
 
   if(message.content == '렌트야 바보') {
-    return message.reply('응 아니야 자기소개 하지 마요,' + `<@${message.author.id}>`+ ".");
+    return message.reply('응 아니야 자기소개 하지 마요,' + `<@${message.author.id}>`+ "바보~");
   }
 
   if(message.content == 'embed') {
