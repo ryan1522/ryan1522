@@ -79,9 +79,12 @@ client.on('message', (message) => {
   if(message.content == '렌트야 프로그램') {
     return message.reply("1번째 업데이트 기준으로 총 208개의 줄로 이루어진 node.js 명령어로 만들어 졌다.");
   }
+  
+  if(message.content == '렌트야 안녕') {
+    return message.reply("안녕하세요!");
+  }
 
-
-  if(message.content == 'embed') {
+ if(message.content == 'embed') {
     let img = 'https://media.discordapp.net/attachments/757747891312918618/757753105088643142/5.jpg';
     let embed = new Discord.RichEmbed()
       .setTitle('정보')
