@@ -11,7 +11,7 @@ client.on('ready', () => {
   client.user.setPresence({ game: { name: '"렌트야"라고 적어보세요!' }, status: 'online' })
 });
 
-client.on("guildMemberAdd", (member) => {
+client.on("guildmemberAdd", (member) => {
   const guild = member.guild;
   const newUser = member.user;
   const welcomeChannel = guild.channels.find(channel => channel.name == welcomeChannelName);
@@ -21,7 +21,7 @@ client.on("guildMemberAdd", (member) => {
   member.addRole(guild.roles.find(role => role.name == "빛나는 조각"));
 });
 
-client.on("guildMemberRemove", (member) => {
+client.on("guildmemberRemove", (member) => {
   const guild = member.guild;
   const deleteUser = member.user;
   const byeChannel = guild.channels.find(channel => channel.name == byeChannelName);
