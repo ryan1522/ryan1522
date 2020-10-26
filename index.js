@@ -41,8 +41,10 @@ client.on('message', (message) => {
   }
 
   if(message.content == '렌트야') {
-    return message.reply('네 무엇을 도와 드릴까요? "렌트야 도움말"이라 적어보세요!');
+    return message.reply('네 무엇을 도와드릴까요?');
   }
+
+    
 
  if(message.content == '렌트야 도움말') {
     return message.reply('렌트야, ping, embed2, !전체공지, !청소와 같은 명령어가 있습니다! 자신의 권한이 이 명령어를 사용할 수 있는 등급인지 알아 보시고 사용해 주세요!');
