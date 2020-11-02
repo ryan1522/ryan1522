@@ -84,6 +84,10 @@ client.on('message', (message) => {
     return message.reply("안녕하세요!");
   }
 
+  if(message.content == '애향') {
+    return message.reply('바부 멍청이~');
+  }
+
  if(message.content == 'embed') {
     let img = 'https://media.discordapp.net/attachments/757747891312918618/757753105088643142/5.jpg';
     let embed = new Discord.RichEmbed()
