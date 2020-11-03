@@ -213,68 +213,46 @@ async function AutoMsgDelete(message, str, delay = 3000) {
 }
 
 
-client.login(token);
-
-function checkContinuousChatting(bot, message) {
-  let sponsor = '699076030211555368'; // 후원자
-  let best_Talker = '757427128269799504'; // 채팅창지박령
-  // let sponsor = '706088309738307585'; // 봇
-  // let best_Talker = '741901425663279145'; // 관리자
-  let apology_channel = '<718377133009010738> 가서 사죄하세요.'; // 사죄하는 곳
-
-  let member = message.guild.members.cache.find(x => x.user.id == message.author.id );
-  let isSponsor = member._roles.find(x => x == sponsor);
-  let isBest_Talker = member._roles.find(x => x == best_Talker);
-
-  // 후원자 이면서 채팅창지박령이면 뮤트 먹지 않음.
-  if(isSponsor && isBest_Talker) return;
-
-  // 관리자는 도배 걸리지 않음.
-  if(message.member.hasPermission('ADMINISTRATOR')) return;
-
-  // 시간, 뮤트 롤
-  let messageTime = moment().tz('Asia/Seoul').locale('ko').valueOf()
-  let time = bot.authors.get(message.author.id);
-  let forbiddenWordTime = bot.authors.get(message.author.id) || messageTime;
-  let muterole = message.channel.guild.roles.cache.find(r => r.name == "Muted")
-
-  // 욕설 체크
-  let msg = message.content;
-  for(fw of forbiddenWord) {
-      if(msg.indexOf(bot.prefix+fw) != -1) { // ㅗ 같이. 명령어와 섞일 수 있기 때문에 추가한 부분
-          continue;
-      } else if(msg.indexOf(fw) != -1) {
-          message.guild.members.cache.find(x => x.id == message.author.id).roles.add(muterole.id)
-          if(messageTime == forbiddenWordTime) {
-              message.reply(`처음부터 욕을 하냐 욕하지 마세요 YOU MUTED.\n\`\`사용한 욕: ${fw}\`\`   \`\`전 채팅과의 간격 ${messageTime - forbiddenWordTime}ms\`\`\n\n${apology_channel}`);
-          } else {
-              message.reply(`욕 하지마세요. 님 Mute 드셈.\n\`\`사용한 욕: ${fw}\`\`   \`\`전 채팅과의 간격 ${messageTime - forbiddenWordTime}ms\`\`\n\n${apology_channel}`);
-          }
-          bot.authors.set(message.author.id, messageTime);
-          return true;
+let MuteRole = '718365703043809362'
+let Cooltime_Mute = 7 * 100 //밀리세컨드 
+// 3초내에 칠 시 뮤트
+let User_Mute_Object = {}
+client.on('message', async message => {
+  if (message.author.bot || !message.guild) return
+  MuteRole = message.guild.roles.cache.find(r => r.id == MuteRole)
+  const M_Author = message.author
+  if (!message.member.hasPermission('ADMINISTRATOR')) {
+    let Author_Object = User_Mute_Object[M_Author.id]
+    if (!Author_Object) {
+      User_Mute_Object[M_Author.id] = {
+        time: 0,
+        interval: null,
+        muted: false
       }
+    } else {
+      if (Author_Object.interval != null) {
+        if (Cooltime_Mute >= Author_Object.time && !Author_Object.muted) {
+          message.member.roles.add(MuteRole)
+          Author_Object.muted = true
+          message.reply(`전 채팅과의 시간차 ${Author_Object.time}ms`)
+        }
+        clearInterval(Author_Object.interval)
+        Author_Object.interval = null
+      } else if (!Author_Object.muted) {
+        Author_Object.interval = setInterval(() => {
+          Author_Object.time++
+        }, 1)
+      }
+      Author_Object.time = 0
+    }
   }
-
-// 도배성 채팅 체크
-if(message.content == '.' || message.content == '?') {
-  message.guild.members.cache.find(x => x.id == message.author.id).roles.add(muterole.id)
-  message.reply(`\`\`.\`\` \`\`?\`\` 하나만 치지마세요. Mute 드셈.\n${apology_channel}`);
-      bot.authors.set(message.author.id, messageTime);
-      return true;
-  } else if(!time) {
-      bot.authors.set(message.author.id, messageTime);
-      return false;
-  } else if(messageTime - time <= 700) {
-      message.guild.members.cache.find(x => x.id == message.author.id).roles.add(muterole.id)
-      message.reply(`단타 도배하지마세요. 님 Mute 드셈.\n${apology_channel} \`\`전 채팅과의 간격 ${messageTime - time}ms\`\``);
-      bot.authors.set(message.author.id, messageTime);
-      return true;
+  if (message.member.hasPermission('ADMINISTRATOR') && /!언뮤트 <@!?(\d{17,19})>/g.test(message.content)) {
+    const Mention_member = message.mentions.members.first()
+    Mention_member.roles.remove(MuteRole)
+    User_Mute_Object[Mention_member.id].muted = false
+    User_Mute_Object[Mention_member.id].time = 0
+    message.channel.send(`${Mention_member}, 해방됨`)
   }
+})
 
-  bot.authors.set(message.author.id, messageTime);
-  return false;
-}
-
-client.on('message', (message) => {
-  if(checkContinuousChatting(bot, message)) return;
-});
+client.login("NzU3NDI3MTI4MjY5Nzk5NTA0.X2gO-w.NImhJqkUnYIY4k1iyd-c1M6n4NQ")
